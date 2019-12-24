@@ -35,6 +35,7 @@ module GraphqlApi
     # CORS config to allow ajax
     config.middleware.insert_before 0, Rack::Cors do
       allow do
+        # FIXME Apply domain in production
         origins '*'
         resource '*', headers: :any, methods: [:get, :post, :options]
       end
