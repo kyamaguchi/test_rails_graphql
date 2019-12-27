@@ -15,6 +15,14 @@ const USERS_QUERY = gql`
 `;
 
 class Users extends Component {
+  updateUsers = (cache, { data: { createUser } }) => {
+    const { users } = cache.readQuery({ query: USERS_QUERY });
+    cache.writeQuery({
+      query: USERS_QUERY,
+      data: { users: users.concat([createUser.user]) },
+    });
+  }
+
   render() {
     return (
       <Query query={USERS_QUERY}>
