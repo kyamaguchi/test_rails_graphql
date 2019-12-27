@@ -16,7 +16,7 @@ const USER_QUERY = gql`
   }
 `;
 
-const Users = ({ user, selectUser }) => (
+const User = ({ user, selectUser }) => (
   <Query query={USER_QUERY} variables={{ id: user.id }}>
     {({ loading, error, data }) => {
       if (loading) return <div>Fetching..</div>
@@ -44,4 +44,4 @@ const Users = ({ user, selectUser }) => (
   </Query>
 );
 
-export default Users;
+export default User;
