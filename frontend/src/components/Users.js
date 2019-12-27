@@ -23,13 +23,10 @@ class Users extends Component {
           return (
             <div className="flex flex-wrap mb-4">
               {data.users.map((user) => {
-                return <div key={user.id} className="m-4 w-1/4 rounded overflow-hidden shadow-lg">
+                return <div key={user.id}
+                            className="m-4 w-1/4 rounded overflow-hidden shadow-lg"
+                            onClick={this.props.selectUser.bind(this, user)}>
                   Email: {user.email}
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">{user.name}</div>
-                    <p className="text-grey-darker text-base">{user.email}</p>
-                    <p className="text-grey-darker text-base">{user.booksCount} books</p>
-                  </div>
                 </div>
               })}
             </div>
@@ -39,4 +36,5 @@ class Users extends Component {
     )
   }
 }
+
 export default Users;
