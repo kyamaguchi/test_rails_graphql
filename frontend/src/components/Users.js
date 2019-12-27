@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import CreateUser from './CreateUser';
 
 const USERS_QUERY = gql`
   query {
@@ -21,15 +22,27 @@ class Users extends Component {
           if (loading) return <div>Fetching..</div>
           if (error) return <div>Error!</div>
           return (
-            <div className="flex flex-wrap mb-4">
-              {data.users.map((user) => {
-                return <div key={user.id}
-                            className="m-4 w-1/4 rounded overflow-hidden shadow-lg"
-                            onClick={this.props.selectUser.bind(this, user)}>
-                  Email: {user.email}
-                </div>
-              })}
-            </div>
+            <div>
+              <div className="flex flex-wrap mb-4">
+                {data.users.map((user) => {
+                  return <div key={user.id}
+                              className="m-4 w-1/4 rounded overflow-hidden shadow-lg"
+                              onClick={this.props.selectUser.bind(this, user)}>
+                    Email: {user.email}
+                  </div>
+                })}
+              </div>
+              <div className="flex flex-wrap mb-4">
+                <Fragment>
+                  {data.users.map((user) => {
+                    // truncated
+                  })}
+                  <div className="m-4 w-1/4 rounded overflow-hidden shadow-lg">
+                    <CreateUser onCreateUser={this.updateUsers} />
+                  </div>
+                </Fragment>
+              </div>
+             </div>
           )
         }}
       </Query>
